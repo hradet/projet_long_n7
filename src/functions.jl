@@ -61,7 +61,7 @@ function simulate(ld::Load, pv::Source, liion::Liion, controller::AbstractContro
         controller.u_liion[h] = compute_controls(controller, info)
 
         # Simulate operation dynamic
-        liion.soc[h+1], liion.power[h] = dummy_model(liion, info.x_liion, controller.u_liion[h], Δh)
+        liion.soc[h+1], liion.power[h] = model_dynamics(liion, info.x_liion, controller.u_liion[h], Δh)
 
         # Simulate recourse variable
         grid.power[h] = max(0. , ld.power[h] - pv.power[h]  - liion.power[h])
@@ -70,7 +70,7 @@ function simulate(ld::Load, pv::Source, liion::Liion, controller::AbstractContro
 end
 
 # Dummy Li-ion model
-function dummy_model(liion::Liion, x_liion, u_liion, Δh)
+function model_dynamics(liion::Liion, x_liion, u_liion, Δh)
     #=
     Here is a dummy model for the battery. You have to code the model you want
     to use at this place
