@@ -1,1 +1,1 @@
-# hymazonie_benchmark
+# Materiel pour le projet long N7
