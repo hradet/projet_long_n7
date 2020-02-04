@@ -1,34 +1,44 @@
 #
 # -- Julia v1.2.0
 #
+#-------------------------------------------------------------------------------
+#                                  Abstract type
+#-------------------------------------------------------------------------------
+abstract type AbstractController end
 
-# Load
+#-------------------------------------------------------------------------------
+#                                  Load
+#-------------------------------------------------------------------------------
 struct Load
     # Variables
-    power
+    power::Array{Float64,1}
 end
 
-# Source
+#-------------------------------------------------------------------------------
+#                                  Solar panels
+#-------------------------------------------------------------------------------
 struct Source
     # Parameter
-    powerMax
+    powerMax::Float64
     # Variables
-    power
+    power::Array{Float64,1}
 end
 
-# Liion
+#-------------------------------------------------------------------------------
+#                                  Li-ion
+#-------------------------------------------------------------------------------
 struct Liion
     # Paramètres
-    Erated
-    cRateChMax
-    cRateDchMax
-    ηCh
-    ηDch
-    socMin
-    socMax
+    Erated::Float64
+    cRateChMax::Float64
+    cRateDchMax::Float64
+    ηCh::Float64
+    ηDch::Float64
+    socMin::Float64
+    socMax::Float64
     # Variables
-    power
-    soc
+    power::Array{Float64,1}
+    soc::Array{Float64,1}
 end
 
 # Define a new constructor in order to simplify initialization
@@ -48,24 +58,32 @@ function Liion(outputGUI, nh)
     return Liion(Erated,cRateChMax,cRateDchMax,ηCh,ηDch,socMin,socMax,power,soc)
 end
 
-# Controller
-abstract type AbstractController end
-struct Controller <: AbstractController
-    u_liion
+#-------------------------------------------------------------------------------
+#                                  Controller
+#-------------------------------------------------------------------------------
+mutable struct Controller <: AbstractController
+    π::Function
+    u::Array{Float64,1}
+    Controller() = new()
 end
 
-# Grid
+#-------------------------------------------------------------------------------
+#                                  Grid
+#-------------------------------------------------------------------------------
 struct Grid
     # Paramètres
-    C_grid
-    powerMax
+    C_grid::Array{Float64,1}
+    powerMax::Float64
     # Variables
-    power
+    power::Array{Float64,1}
 end
 
-# Informations
+#-------------------------------------------------------------------------------
+#                                  Informations
+#-------------------------------------------------------------------------------
 struct Informations
-    h
-    x_liion
-    w
+    h::Int64
+    ld::Load
+    pv::Source
+    liion::Liion
 end
