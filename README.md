@@ -2,8 +2,8 @@
 
 ## Prérequis :
 
-* [CSV](https://github.com/JuliaData/CSV.jl)
-* [Seaborn](https://github.com/JuliaPy/Seaborn.jl)
+* [CSV](https://github.com/JuliaData/CSV.jl) 
+* [Seaborn](https://github.com/JuliaPy/Seaborn.jl) (ou le package de votre choix pour "ploter" vos résultats...)
 * [DataFrames](https://github.com/JuliaData/DataFrames.jl)
 * [JuMP](https://github.com/JuliaOpt/JuMP.jl) (pour l'optimisation...)
 * Le solveur de votre choix avec le package associé : par exemple, si vous utilisez CBC, il faut installer le package [Cbc](https://github.com/JuliaOpt/Cbc.jl)
