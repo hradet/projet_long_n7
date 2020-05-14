@@ -1,33 +1,23 @@
 # Module
 using ProjetN7
-# Plots
-using Seaborn
-pygui(true)
-# Data
+# Data process
 using CSV, DataFrames
+# Plot
+using Seaborn
+# Display figure
+pygui(true)
 
-# Include file as we suppose parameters and data come from a GUI
+# Include file as we suppose parameters come from a GUI
 include("load_GUI.jl")
-
-# Global constant
-const Δh, H = 1, 365 * 24 # in hours
-const nh = length(Δh:Δh:H) # number of h step
 
 # Load GUI parameters
 outputGUI = loadGUI()
 
 # Microgrid initialization
-ld, pv, liion, controller, grid = ProjetN7.initialization(outputGUI)
+ld, pv, liion, controller, grid, ω_simu = ProjetN7.initialization(outputGUI)
 
-# Simulate
-ProjetN7.simulate(ld, pv, liion, controller, grid, Δh)
+# Simulation
+cost = ProjetN7.simulate(ld, pv, liion, controller, grid, ω_simu, outputGUI["parameters"])
 
 # Plots
-subplot(211), plot(ld.power, label="Load")
-plot(pv.power, label="PV")
-plot(liion.power, label="Liion")
-plot(grid.power, label="Grid")
-ylabel("Power (kW)")
-subplot(212), plot(liion.soc)
-xlabel("Hours")
-ylabel("SOC (kWh)")
+ProjetN7.plot_results(ld, pv, liion, grid)

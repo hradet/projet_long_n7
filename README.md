@@ -10,7 +10,7 @@
 
 ## Utilisation du module `ProjetN7.jl` :
 
-Si vous téléchargez le package en local, une facçon simple pour l'utiliser est d'ajouter la commande suivante dans un fichier `startup.jl` et de le mettre dans le dossier `.julia\config` que vous créez si il n'existe pas : 
+Si vous téléchargez le package en local, une facçon simple pour l'utiliser est d'ajouter la commande suivante dans un fichier `startup.jl` et de le mettre dans un dossier `.julia\config` que vous créez si il n'existe pas : 
 
 ```
 push!(LOAD_PATH, "your_path_to_directory\\projet_long_n7\\src")
