@@ -111,8 +111,8 @@ function linear_model(liion::Liion, x_liion::NamedTuple, u_liion::Float64,
     #=
     Here is a simple linear model for the battery
     INPUT :
-            x_liion = (Erated[y], soc[h,y], soh[h,y]) tuple
-            u_liion[h,y] = control power in kW
+            x_liion = (soc, soh) tuple of states
+            u_liion = power decision in kW
     OUTPUT :
             soc_next
             soh_next
